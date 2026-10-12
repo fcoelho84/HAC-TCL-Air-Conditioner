@@ -1,0 +1,60 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "TCL AC Local",
+        "description": "Controle local do ar-condicionado TCL (BroadLink/DNA) na LAN. Sem login cloud.",
+        "data": {
+          "setup_method": "Método de setup"
+        }
+      },
+      "local_discovery": {
+        "title": "Descoberta local",
+        "description": "Descobre ACs TCL já pareados na LAN e obtém a chave local por autenticação BroadLink. Sem conta.",
+        "data": {
+          "seed_hosts": "IPs conhecidos (opcional, separados por vírgula)",
+          "scan_subnet": "Escanear subnet local"
+        },
+        "data_description": {
+          "seed_hosts": "Ex.: 192.168.1.50, 192.168.1.51 se o broadcast não achar tudo.",
+          "scan_subnet": "Testa cada IP da /24 do Home Assistant quando o broadcast falha."
+        }
+      },
+      "select_local": {
+        "title": "Selecionar dispositivos",
+        "description": "Escolha quais ACs descobertos adicionar.",
+        "data": {
+          "selection": "Dispositivos"
+        }
+      },
+      "dhcp_confirm": {
+        "title": "TCL AC encontrado",
+        "description": "Descoberto {name} em {host} ({mac}). Confirme para controle local."
+      },
+      "manual": {
+        "title": "Setup manual",
+        "description": "Informe host, MAC e chave local (32 hex) se já souber.",
+        "data": {
+          "name": "Nome",
+          "host": "Host",
+          "mac": "MAC",
+          "key": "Chave do dispositivo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Não conectou ao dispositivo com esses dados.",
+      "discovery_error": "Descoberta LAN falhou. Veja o log do Home Assistant.",
+      "no_lan_devices": "Nenhum AC TCL autenticado na LAN.",
+      "no_devices_selected": "Selecione ao menos um dispositivo.",
+      "already_configured": "Dispositivo já configurado.",
+      "all_devices_configured": "Todos os descobertos já estão configurados.",
+      "locked_device": "AC encontrado com LOCKED=True; autenticação local bloqueada."
+    },
+    "abort": {
+      "already_configured": "Dispositivo já configurado.",
+      "not_supported": "Nenhum AC TCL autenticável neste endereço.",
+      "locked_device": "AC com LOCKED=True bloqueia autenticação local."
+    }
+  }
+}

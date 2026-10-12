@@ -1,0 +1,9 @@
+.re/
+__pycache__/
+*.pyc
+.Python
+.venv/
+venv/
+*.egg-info/
+.idea/
+.vscode/

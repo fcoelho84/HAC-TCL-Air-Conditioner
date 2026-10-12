@@ -1,0 +1,8 @@
+This repository includes protocol code adapted from:
+
+  home-assistant-tcl-intelligent-ac
+  https://github.com/jestempablo/home-assistant-tcl-intelligent-ac
+  Copyright (c) 2026 Pawel Forynski
+  Licensed under the MIT License (see LICENSE).
+
+Reverse-engineering notes for TCL Home Android 7.1.0 are original to this project.

@@ -1,0 +1,31 @@
+{
+  "domain": "tcl_ac_local",
+  "name": "TCL AC Local",
+  "codeowners": ["@fcoelho84"],
+  "config_flow": true,
+  "dhcp": [
+    {
+      "macaddress": "24DFA7*"
+    },
+    {
+      "macaddress": "34EA34*"
+    },
+    {
+      "macaddress": "EC0BAE*"
+    },
+    {
+      "macaddress": "B4430D*"
+    },
+    {
+      "macaddress": "A043B0*"
+    },
+    {
+      "hostname": "oem_tcliso*"
+    }
+  ],
+  "documentation": "https://github.com/fcoelho84/HAC-TCL-Air-Conditioner",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/fcoelho84/HAC-TCL-Air-Conditioner/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
