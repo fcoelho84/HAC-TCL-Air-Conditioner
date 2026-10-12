@@ -51,10 +51,7 @@ Chave AES inicial BroadLink e IV **não** aparecem como ASCII hex neste build; i
 
 ## Conclusão para o HAC
 
-Para controle **local sem login**, o caminho viável observado + corroborado é:
+O app principal controla AC por **MQTT/AWS IoT após login** (`pa.account.tcl.com` + `prod-center.aws.tcljd.com`).  
+A integração **v0.2** pede conta TCL Home e usa esse caminho (ver [`architecture.md`](architecture.md)).
 
-1. Descoberta BroadLink/DNA na LAN (UDP).
-2. Auth `0x0065` → chave por dispositivo.
-3. Get/set `0x006A` com corpo JSON (`pwr`, `temp`, `tcl_mode`, …).
-
-Detalhe do wire: [`protocol.md`](protocol.md).
+Paralelo BroadLink/DNA (UDP `:80`) existe em parte dos modelos; código LAN antigo em `.re/archive-broadlink/`.

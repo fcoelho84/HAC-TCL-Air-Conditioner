@@ -1,36 +1,24 @@
 # Home Assistant
 
-## Instalar (HACS)
-
-1. HACS → Custom repositories → este repo → Integration.
-2. Download **TCL AC Local**.
-3. Reinicie o HA.
-4. Settings → Devices & services → Add → **TCL AC Local**.
-
 ## Setup
 
-Preferir **Local discovery**.
+1. Add integration **TCL AC Local**.
+2. Digite conta TCL Home (e-mail/telefone + senha).
+3. Deixe URLs padrão.
+4. ACs da conta aparecem automaticamente.
 
-Opcional: IPs seed e scan de subnet se o broadcast for filtrado.
+## Dependências
 
-HA e o AC precisam estar na mesma L2/L3 com UDP `:80` liberado.
+O `manifest.json` instala: `boto3`, `PyJWT`.
 
-## Manual
+## Conta
 
-Se já tiver MAC + chave (32 hex) + IP: **Manual setup**.
+Use conta secundária e compartilhe os dispositivos no app TCL Home.
 
-## Entidades
+## Logs
 
-| Plataforma | Uso |
-|------------|-----|
-| `climate` | modo, temp, fan, swing, on/off |
-| `switch` | turbo, eco, quiet, display, … |
-| `select` | opções de airflow detalhadas |
-| `sensor` | outdoor / coil / vent / erros |
-| `binary_sensor` | diagnósticos |
-
-## Limitações
-
-- Só módulos BroadLink/DNA (`devtype` `0x507C` no discovery).
-- AC “só MQTT / Matter” no TCL Home pode não responder.
-- Dispositivo `LOCKED` bloqueia auth local.
+```yaml
+logger:
+  logs:
+    custom_components.tcl_ac_local: info
+```

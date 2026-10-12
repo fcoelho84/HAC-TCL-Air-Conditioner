@@ -1,60 +1,75 @@
 {
   "config": {
+    "flow_title": "TCL AC Local",
     "step": {
       "user": {
-        "title": "TCL AC Local",
-        "description": "Local LAN control for TCL air conditioners (BroadLink/DNA). No cloud login.",
+        "title": "TCL Home account",
+        "description": "Use the same email/phone and password as the TCL Home app. Recommended: a separate account with shared devices.",
         "data": {
-          "setup_method": "Setup method"
+          "username": "TCL Home email or phone",
+          "password": "Password"
         }
       },
-      "local_discovery": {
-        "title": "Local discovery",
-        "description": "Discover already-paired TCL ACs on the LAN and fetch local keys via BroadLink auth. No account.",
+      "settings_of_app": {
+        "title": "App endpoints",
+        "description": "Leave defaults unless TCL changes them.",
         "data": {
-          "seed_hosts": "Known IP addresses (optional, comma-separated)",
-          "scan_subnet": "Scan local subnet"
-        },
-        "data_description": {
-          "seed_hosts": "Example: 192.168.1.50, 192.168.1.51 if broadcast misses devices.",
-          "scan_subnet": "Probe each address on Home Assistant's /24 when broadcast fails."
+          "app_login_url": "App login URL",
+          "cloud_urls": "Cloud URLs",
+          "app_id": "App Id"
         }
       },
-      "select_local": {
-        "title": "Select devices",
-        "description": "Choose which discovered ACs to add.",
+      "settings_of_logs": {
+        "title": "Logging",
+        "description": "Logs: Settings → System → Logs → Show raw logs.",
         "data": {
-          "selection": "Devices"
-        }
-      },
-      "dhcp_confirm": {
-        "title": "Discovered TCL AC",
-        "description": "Found {name} at {host} ({mac}). Submit to add local control."
-      },
-      "manual": {
-        "title": "Manual setup",
-        "description": "Enter host, MAC and local key (32 hex) if already known.",
-        "data": {
-          "name": "Name",
-          "host": "Host",
-          "mac": "MAC address",
-          "key": "Device key"
+          "verbose_device_logging": "Device logs",
+          "verbose_session_logging": "Session / token logs",
+          "verbose_setup_logging": "Setup logs"
         }
       }
     },
     "error": {
-      "cannot_connect": "Could not connect to the device with these details.",
-      "discovery_error": "LAN discovery failed. Check the Home Assistant log.",
-      "no_lan_devices": "No supported TCL AC could be discovered and authenticated on the LAN.",
-      "no_devices_selected": "Select at least one device.",
-      "already_configured": "This device is already configured.",
-      "all_devices_configured": "All discovered devices are already configured.",
-      "locked_device": "A TCL AC was discovered with LOCKED=True and blocks local authentication."
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
     },
     "abort": {
-      "already_configured": "This device is already configured.",
-      "not_supported": "No supported TCL AC could be authenticated at this address.",
-      "locked_device": "The discovered TCL AC reports LOCKED=True and blocks local authentication."
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "description": "Account changes trigger a TCL Home re-login."
+      },
+      "option_page_account": {
+        "title": "TCL Home account",
+        "description": "Same credentials as the TCL Home app.",
+        "data": {
+          "username": "Email or phone",
+          "password": "Password"
+        }
+      },
+      "option_page_tcl_app": {
+        "title": "App endpoints",
+        "description": "Android app endpoints. Change only if TCL updates them.",
+        "data": {
+          "app_login_url": "App login URL",
+          "cloud_urls": "Cloud URLs",
+          "app_id": "App Id"
+        }
+      },
+      "option_page_logs": {
+        "title": "Logging",
+        "description": "Verbose logs for diagnostics.",
+        "data": {
+          "verbose_device_logging": "Device logs",
+          "verbose_session_logging": "Session / token logs",
+          "verbose_setup_logging": "Setup logs"
+        }
+      }
     }
   }
 }

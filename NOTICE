@@ -1,8 +1,15 @@
-This repository includes protocol code adapted from:
+This repository includes substantial code adapted from:
 
-  home-assistant-tcl-intelligent-ac
-  https://github.com/jestempablo/home-assistant-tcl-intelligent-ac
-  Copyright (c) 2026 Pawel Forynski
+  ha-tcl-home-unofficial-integration
+  https://github.com/nemesa/ha-tcl-home-unofficial-integration
+  Copyright (c) 2025 András Nemes
   Licensed under the MIT License (see LICENSE).
 
-Reverse-engineering notes for TCL Home Android 7.1.0 are original to this project.
+Login approach also credits:
+  https://github.com/DavidIlie/tcl-home-ac
+
+Earlier BroadLink/DNA LAN protocol notes also credit:
+  https://github.com/jestempablo/home-assistant-tcl-intelligent-ac
+  Copyright (c) 2026 Pawel Forynski (MIT)
+
+Reverse-engineering notes for TCL Home Android are original to this project.

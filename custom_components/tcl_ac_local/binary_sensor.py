@@ -1,90 +1,165 @@
-"""Binary sensor entities for TCL AC Local diagnostics."""
+"""Interfaces with the Example api sensors."""
 
-from __future__ import annotations
+import logging
 
-from dataclasses import dataclass
-from typing import Any
-
-from homeassistant.components.binary_sensor import BinarySensorDeviceClass, BinarySensorEntity, BinarySensorEntityDescription
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity import EntityCategory
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-
-from .const import DOMAIN
-from .coordinator import TclAcCoordinator, TclAcRuntime
-
-
-@dataclass(frozen=True, kw_only=True)
-class TclAcBinarySensorDescription(BinarySensorEntityDescription):
-    """Description for a TCL AC binary sensor."""
-
-    param: str
-
-
-BINARY_SENSOR_DESCRIPTIONS: tuple[TclAcBinarySensorDescription, ...] = (
-    TclAcBinarySensorDescription(
-        key="filter_dirty",
-        name="Filter dirty",
-        param="if_filterdirty",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        entity_category=EntityCategory.DIAGNOSTIC,
-    ),
-    TclAcBinarySensorDescription(
-        key="clean_check",
-        name="Clean check",
-        param="clean_check",
-        entity_category=EntityCategory.DIAGNOSTIC,
-    ),
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntity,
 )
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+
+from .config_entry import New_NameConfigEntry
+from .coordinator import IotDeviceCoordinator
+from .device import Device, DeviceTypeEnum
+from .device_features import DeviceFeatureEnum
+from .tcl_entity_base import TclEntityBase
+
+_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    entry: ConfigEntry,
+    config_entry: New_NameConfigEntry,
     async_add_entities: AddEntitiesCallback,
-) -> None:
-    """Set up TCL AC Local binary sensors from a config entry."""
+):
+    """Set up the Binary Sensors."""
 
-    async_add_entities(
-        [
-            TclAcBinarySensor(runtime, description)
-            for runtime in hass.data[DOMAIN][entry.entry_id]
-            for description in BINARY_SENSOR_DESCRIPTIONS
-        ],
-        update_before_add=True,
-    )
+    coordinator = config_entry.runtime_data.coordinator
+
+    sensors = []
+    for device in config_entry.devices:
+        sensors.append(
+            DynamicBinarySensorHandlerNoAutoIsOnlineCheck(
+                hass=hass,
+                coordinator=coordinator,
+                device=device,
+                type="IsOnline",
+                name="Is Online",
+                icon_fn=lambda device: (
+                    "mdi:cloud-check-outline"
+                    if device.is_online == 1
+                    else "mdi:cloud-cancel-outline"
+                ),
+                is_on_fn=lambda device: device.is_online,
+                is_available_fn=lambda device: True,
+            )
+        )
+        if (
+            DeviceFeatureEnum.SENSOR_DEHUMIDIFIER_WATER_BUCKET_FULL
+            in device.supported_features
+        ):
+            sensors.append(
+                BinarySensorHandlerOccupancy(
+                    hass=hass,
+                    coordinator=coordinator,
+                    device=device,
+                    type="IsDehumidifierWaterBucketFull",
+                    name="Is Water Bucket Full",
+                    icon_fn=lambda device: (
+                        "mdi:bucket"
+                        if 5 in device.data.error_code
+                        else "mdi:bucket-outline"
+                    ),
+                    is_on_fn=lambda device: 5 in device.data.error_code,
+                )
+            )
+
+    async_add_entities(sensors)
 
 
-class TclAcBinarySensor(CoordinatorEntity[TclAcCoordinator], BinarySensorEntity):
-    """Binary sensor for a TCL AC boolean state parameter."""
-
-    _attr_has_entity_name = True
-
-    entity_description: TclAcBinarySensorDescription
-
-    def __init__(self, runtime: TclAcRuntime, description: TclAcBinarySensorDescription) -> None:
-        super().__init__(runtime.coordinator)
-        self.entity_description = description
-        self._attr_device_info = runtime.device_info
-        self._attr_unique_id = f"{runtime.unique_id}_{description.key}"
+class BinarySensorHandler(TclEntityBase, BinarySensorEntity):
+    def __init__(
+        self,
+        hass: HomeAssistant, 
+        coordinator: IotDeviceCoordinator,
+        device: Device,
+        type: str,
+        name: str,
+        icon_fn: lambda device: str,
+        is_on_fn: lambda device: bool,
+    ) -> None:
+        TclEntityBase.__init__(self, coordinator, type, name, device)
+        self.hass=hass
+        self.coordinator=coordinator
+        self.type = type
+        self.icon_fn = icon_fn
+        self.is_on_fn = is_on_fn
+        self.prev_state = self.is_on_fn(self.device)
 
     @property
-    def available(self) -> bool:
-        """Return whether this parameter is supported and the device is available."""
+    def icon(self):
+        return self.icon_fn(self.device)
 
-        return super().available and self._raw_value not in (None, -1)
+    @property
+    def device_class(self) -> str:
+        return BinarySensorDeviceClass.POWER
 
     @property
     def is_on(self) -> bool | None:
-        """Return whether the diagnostic condition is active."""
+        self.device = self.coordinator.get_device_by_id(self.device.device_id)
+        new_state = self.is_on_fn(self.device)
+        if self.type == "IsOnline" and new_state != self.prev_state:
+            self.hass.async_create_task(self.coordinator.async_refresh())
+        self.prev_state = new_state
+        return new_state
 
-        value = self._raw_value
-        if value in (None, -1):
-            return None
-        return value == 1
+
+class BinarySensorHandlerOccupancy(TclEntityBase, BinarySensorEntity):
+    def __init__(
+        self,
+        hass: HomeAssistant, 
+        coordinator: IotDeviceCoordinator,
+        device: Device,
+        type: str,
+        name: str,
+        icon_fn: lambda device: str,
+        is_on_fn: lambda device: bool,
+    ) -> None:
+        TclEntityBase.__init__(self, coordinator, type, name, device)
+        self.icon_fn = icon_fn
+        self.is_on_fn = is_on_fn
 
     @property
-    def _raw_value(self) -> Any:
-        return (self.coordinator.data or {}).get(self.entity_description.param)
+    def icon(self):
+        return self.icon_fn(self.device)
+
+    @property
+    def device_class(self) -> str:
+        return BinarySensorDeviceClass.OCCUPANCY
+
+    @property
+    def is_on(self) -> bool | None:
+        self.device = self.coordinator.get_device_by_id(self.device.device_id)
+        return self.is_on_fn(self.device)
+
+
+class DynamicBinarySensorHandlerNoAutoIsOnlineCheck(
+    BinarySensorHandler, BinarySensorEntity
+):
+    def __init__(
+        self,
+        hass: HomeAssistant, 
+        coordinator: IotDeviceCoordinator,
+        device: Device,
+        type: str,
+        name: str,
+        icon_fn: lambda device: str,
+        is_on_fn: lambda device: bool,
+        is_available_fn: lambda device: bool,
+    ) -> None:
+        BinarySensorHandler.__init__(
+            self,
+            hass=hass,
+            coordinator=coordinator,
+            device=device,
+            type=type,
+            name=name,
+            icon_fn=icon_fn,
+            is_on_fn=is_on_fn,
+        )
+        self.is_available_fn = is_available_fn
+
+    @property
+    def available(self) -> bool:
+        return self.is_available_fn(self.device)
