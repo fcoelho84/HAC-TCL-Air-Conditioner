@@ -77,7 +77,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="SelfCleanButton",
-                    name="Evaporator Clean",
+                    name="Limpeza do evaporador",
                     name_fn=lambda device: "Stop Evaporator Cleaning"
                     if device and device.data and device.data.self_clean == 1
                     else "Start Evaporator Cleaning",

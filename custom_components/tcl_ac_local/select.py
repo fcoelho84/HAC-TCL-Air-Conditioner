@@ -30,7 +30,7 @@ from .device_enums import (AirPurifierFanWindSpeedStrEnum,
                            getWindSpeedLowMediumHigh)
 from .device_features import DeviceFeatureEnum
 from .device_types import DeviceTypeEnum
-from .tcl_entity_base import TclEntityBase, type_to_translation_key
+from .tcl_entity_base import TclEntityBase
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -807,14 +807,14 @@ def get_SELECT_HORIZONTAL_DIRECTION_type(device: Device) -> str:
 
 def get_SELECT_VERTICAL_DIRECTION_name(device: Device) -> str:
     if device.device_type == DeviceTypeEnum.SPLIT_AC_FRESH_AIR:
-        return "Air flow"
-    return "Up and Down air supply"
+        return "Fluxo de ar"
+    return "Direção vertical do ar"
 
 
 def get_SELECT_HORIZONTAL_DIRECTION_name(device: Device) -> str:
     if device.device_type == DeviceTypeEnum.SPLIT_AC_FRESH_AIR:
-        return "Horizontal Air flow"
-    return "Left and Right air supply"
+        return "Fluxo de ar horizontal"
+    return "Direção horizontal do ar"
 
 
 def get_SELECT_PORTABLE_WIND_SPEED_options(device: Device) -> list[str] | None:
@@ -961,7 +961,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_MODE,
                     type="Mode",
-                    name="Mode",
+                    name="Modo",
                     icon_fn=lambda device: "mdi:set-none",
                 )
             )
@@ -979,7 +979,7 @@ async def async_setup_entry(
                         device=device,
                         deviceFeature=DeviceFeatureEnum.SELECT_WIND_SPEED,
                         type="WindSpeed",
-                        name="Wind Speed",
+                        name="Velocidade do vento",
                         icon_fn=lambda device: "mdi:weather-windy",
                         options_values_fn=lambda device: [
                             e.value for e in WindSeedEnum
@@ -1004,7 +1004,7 @@ async def async_setup_entry(
                         device=device,
                         deviceFeature=DeviceFeatureEnum.SELECT_WIND_SPEED,
                         type="WindSpeed",
-                        name="Wind Speed",
+                        name="Velocidade do vento",
                         icon_fn=lambda device: "mdi:weather-windy",
                         options_values_fn=lambda device: [
                             e.value for e in AirPurifierFanWindSpeedStrEnum
@@ -1025,7 +1025,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_WORK_MODE,
                     type="WorkMode",
-                    name="Work Mode",
+                    name="Modo de trabalho",
                     icon_fn=lambda device: "mdi:air-filter",
                     options_values_fn=lambda device: [
                         e.value for e in AirPurifierWorkModeStrEnum
@@ -1046,7 +1046,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_WINDOW_AS_WIND_SPEED,
                     type="WindowAcWindSpeed",
-                    name="Wind Speed",
+                    name="Velocidade do vento",
                     icon_fn=lambda device: "mdi:weather-windy",
                 )
             )
@@ -1062,7 +1062,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_DEHUMIDIFIER_WIND_SPEED_LOW_MEDIUM_HEIGH,
                     type="Dehumidifier.WindSpeed.LowMediumHeigh",
-                    name="Wind Speed",
+                    name="Velocidade do vento",
                     icon_fn=lambda device: "mdi:weather-windy",
                 )
             )
@@ -1075,7 +1075,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_WIND_SPEED_7_GEAR,
                     type="WindSpeed7Gear",
-                    name="Wind Speed",
+                    name="Velocidade do vento",
                     icon_fn=lambda device: "mdi:weather-windy",
                 )
             )
@@ -1088,7 +1088,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_PORTABLE_WIND_SPEED,
                     type="PortableWindSpeed",
-                    name="Wind Speed",
+                    name="Velocidade do vento",
                     icon_fn=lambda device: "mdi:weather-windy",
                     options_values_fn=lambda device: get_SELECT_PORTABLE_WIND_SPEED_options(
                         device
@@ -1110,7 +1110,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_PORTABLE_WIND_4VALUE_SPEED,
                     type="PortableWind4ValueSpeed",
-                    name="Wind Speed",
+                    name="Velocidade do vento",
                     icon_fn=lambda device: "mdi:weather-windy",
                     options_values_fn=lambda device: get_SELECT_PORTABLE_WIND_4VALUE_SPEED_options(
                         device
@@ -1129,7 +1129,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_GENERATOR_MODE,
                     type="GeneratorMode",
-                    name="Generator Mode",
+                    name="Modo gerador",
                     icon_fn=lambda device: "mdi:generator-portable",
                 )
             )
@@ -1142,7 +1142,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_FRESH_AIR,
                     type="FreshAir",
-                    name="Fresh Air Strength",
+                    name="Força do ar fresco",
                     icon_fn=lambda device: "mdi:window-open-variant",
                     options_values_fn=lambda device: [e.value for e in FreshAirEnum],
                     available_fn=lambda device: get_SELECT_FRESH_AIR_available_fn(
@@ -1159,7 +1159,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_WIND_FEELING,
                     type="WindFeeling",
-                    name="Wind Feeling",
+                    name="Sensação do vento",
                     icon_fn=lambda device: "mdi:weather-dust",
                 )
             )
@@ -1174,9 +1174,6 @@ async def async_setup_entry(
                     type="UpAndDownAirSupplyVector",
                     name=get_SELECT_VERTICAL_DIRECTION_name(device),
                     icon_fn=lambda device: "mdi:swap-vertical",
-                    translation_key=type_to_translation_key(
-                        get_SELECT_VERTICAL_DIRECTION_type(device)
-                    ),
                 )
             )
 
@@ -1190,9 +1187,6 @@ async def async_setup_entry(
                     type="LeftAndRightAirSupplyVector",
                     name=get_SELECT_HORIZONTAL_DIRECTION_name(device),
                     icon_fn=lambda device: "mdi:swap-horizontal",
-                    translation_key=type_to_translation_key(
-                        get_SELECT_HORIZONTAL_DIRECTION_type(device)
-                    ),
                 )
             )
 
@@ -1204,7 +1198,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_SLEEP_MODE,
                     type="SleepMode",
-                    name="Sleep Mode",
+                    name="Modo sono",
                     icon_fn=lambda device: "mdi:sleep",
                     options_values_fn=lambda device: [e.value for e in SleepModeEnum],
                     available_fn=lambda device: get_SELECT_SLEEP_MODE_available_fn(
@@ -1221,7 +1215,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SELECT_TEMPERATURE_TYPE,
                     type="TemperatureType",
-                    name="Temperature Type",
+                    name="Tipo de temperatura",
                     icon_fn=lambda device: "mdi:home-thermometer",
                 )
             )
@@ -1239,11 +1233,8 @@ class SelectHandler(TclEntityBase, SelectEntity):
         name: str,
         deviceFeature: DeviceFeatureEnum,
         icon_fn: lambda device: str,
-        translation_key: str | None = None,
     ) -> None:
         TclEntityBase.__init__(self, coordinator, type, name, device)
-        if translation_key is not None:
-            self._attr_translation_key = translation_key
 
         self.icon_fn = icon_fn
         self.iot_handler = DesiredStateHandlerForSelect(

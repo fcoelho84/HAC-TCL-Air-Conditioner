@@ -57,17 +57,17 @@ async def get_stored_window_ac_data(
     stored_data, need_save = safe_set_value(stored_data, "user_config.behavior.memorize_fan_speed_by_mode", False)
     stored_data, need_save = safe_set_value(stored_data, "user_config.behavior.silent_beep_when_turn_on", False)
 
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Cool.value", 22)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Frio.value", 22)
 
     stored_data, need_save = safe_set_value(stored_data, "user_config.settings.native_temp_step", 1.0)
     stored_data, need_save = safe_set_value(stored_data, "user_config.settings.min_temp", 16)
     stored_data, need_save = safe_set_value(stored_data, "user_config.settings.max_temp", 31)
 
-    default_wind_speed = "Auto"
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Cool.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Dehumidification.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Fan.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Auto.value", default_wind_speed)
+    default_wind_speed = "Automático"
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Frio.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Desumidificação.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Ventilação.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Automático.value", default_wind_speed)
     if need_save:
         await set_stored_data(hass, device_id, stored_data)
     return stored_data

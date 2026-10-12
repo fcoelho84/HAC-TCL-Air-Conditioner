@@ -1,7 +1,5 @@
 """."""
 
-import re
-
 from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -12,12 +10,6 @@ from .coordinator import IotDeviceCoordinator
 from .device import Device, toDeviceInfo
 
 
-def type_to_translation_key(entity_type: str) -> str:
-    key = entity_type.replace(".", "_")
-    key = re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", "_", key)
-    return key.lower()
-
-
 class TclEntityBase(CoordinatorEntity):
     def __init__(
         self, coordinator: IotDeviceCoordinator, type: str, name: str, device: Device
@@ -26,8 +18,7 @@ class TclEntityBase(CoordinatorEntity):
         self.device = device
         self.type = type
         self._attr_has_entity_name = True
-        self._attr_translation_key = type_to_translation_key(type)
-        self._attr_name = None
+        self._attr_name = name
         self._attr_unique_id = f"{DOMAIN}-{type}-{device.device_id}"
 
     @callback
@@ -58,8 +49,7 @@ class TclNonPollingEntityBase(Entity):
         self.device = device
         self.type = type
         self._attr_has_entity_name = True
-        self._attr_translation_key = type_to_translation_key(type)
-        self._attr_name = None
+        self._attr_name = name
         self._attr_unique_id = f"{DOMAIN}-{type}-{device.device_id}"
 
     @property

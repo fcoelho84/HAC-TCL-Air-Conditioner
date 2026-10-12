@@ -26,7 +26,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="CurrentTemperature",
-                    name="Current Temperature",
+                    name="Temperatura atual",
                     value_fn=lambda device: device.data.current_temperature,
                 )
             )
@@ -36,7 +36,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="InternalUnitCoilTemperature",
-                    name="Internal Unit Coil Temperature",
+                    name="Temperatura do serpentín interno",
                     value_fn=lambda device: device.data.internal_unit_coil_temperature,
                 )
             )
@@ -46,7 +46,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="ExternalUnitCoilTemperature",
-                    name="External Unit Coil Temperature",
+                    name="Temperatura do serpentín externo",
                     value_fn=lambda device: device.data.external_unit_coil_temperature,
                 )
             )
@@ -56,7 +56,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="ExternalUnitTemperature",
-                    name="External Unit Temperature",
+                    name="Temperatura da unidade externa",
                     value_fn=lambda device: device.data.external_unit_temperature,
                 )
             )
@@ -66,7 +66,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="ExternalUnitExhaustTemperature",
-                    name="External Unit Exhaust Temperature",
+                    name="Temperatura de exaustão externa",
                     value_fn=lambda device: device.data.external_unit_exhaust_temperature,
                 )
             )
@@ -76,7 +76,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="DehumidifierEnvHumidity",
-                    name="Environment Humidity",
+                    name="Umidade ambiente",
                     value_fn=lambda device: device.data.env_humidity,
                 )
             )
@@ -86,7 +86,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="TVOC.Value",
-                    name="TVOC Value",
+                    name="Valor TVOC",
                     value_fn=lambda device: device.data.tvoc_value,
                 )
             )
@@ -95,7 +95,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="TVOC.Level",
-                    name="TVOC Level",
+                    name="Nível TVOC",
                     device_classification=None,
                     state_classification=SensorStateClass.MEASUREMENT,
                     icon_fn=lambda device: "mdi:dots-hexagon",
@@ -110,7 +110,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="SplitAC.TVOC.Value",
-                    name="TVOC Value",
+                    name="Valor TVOC",
                     value_fn=lambda device: device.data.sensor_TVOC_value,
                 )
             )
@@ -121,7 +121,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="SplitAC.TVOC.Level",
-                    name="TVOC Level",
+                    name="Nível TVOC",
                     device_classification=None,
                     state_classification=SensorStateClass.MEASUREMENT,
                     icon_fn=lambda device: "mdi:dots-hexagon",
@@ -136,7 +136,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="PM25.Level",
-                    name="PM25 Level",
+                    name="Nível PM2.5",
                     device_classification=None,
                     state_classification=SensorStateClass.MEASUREMENT,
                     icon_fn=lambda device: "mdi:dots-hexagon",
@@ -150,7 +150,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="TVOC.SENSOR.Level",
-                    name="TVOC Level",
+                    name="Nível TVOC",
                     device_classification=None,
                     state_classification=SensorStateClass.MEASUREMENT,
                     icon_fn=lambda device: "mdi:dots-hexagon",
@@ -164,7 +164,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="TodayEnergyConsumption",
-                    name="Today Energy Consumption",
+                    name="Consumo de energia hoje",
                     value_fn=lambda device: round(device.extra_tcl_data.get("today_total_electricity",0),2),
                 )
             )
@@ -173,7 +173,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="YesterdayEnergyConsumption",
-                    name="Yesterday Energy Consumption",
+                    name="Consumo de energia ontem",
                     value_fn=lambda device: round(device.extra_tcl_data.get("yesterday_total_electricity",0),2),
                 )
             )
@@ -183,7 +183,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="TodayWorkTime",
-                    name="Today Work Time",
+                    name="Tempo de uso hoje",
                     device_classification=SensorDeviceClass.DURATION,
                     state_classification=SensorStateClass.TOTAL_INCREASING,
                     native_unit_of_measurement=UnitOfTime.HOURS,
@@ -196,7 +196,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="YesterdayWorkTime",
-                    name="Yesterday Work Time",
+                    name="Tempo de uso ontem",
                     device_classification=SensorDeviceClass.DURATION,
                     state_classification=SensorStateClass.TOTAL_INCREASING,
                     native_unit_of_measurement=UnitOfTime.HOURS,
@@ -211,7 +211,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="FilterLifeTime",
-                    name="Filter Life Time",
+                    name="Vida útil do filtro",
                     device_classification=SensorDeviceClass.DURATION,
                     state_classification=SensorStateClass.MEASUREMENT,
                     native_unit_of_measurement=UnitOfTime.HOURS,
@@ -226,7 +226,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="PM25SensorValue",
-                    name="PM2.5 Sensor Value",
+                    name="Valor do sensor PM2.5",
                     device_classification=SensorDeviceClass.PM25,
                     state_classification=SensorStateClass.MEASUREMENT,
                     native_unit_of_measurement="µg/m³",

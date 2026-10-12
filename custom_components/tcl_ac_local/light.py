@@ -51,7 +51,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="AmbitentLight",
-                    name="Ambitent Light",
+                    name="Luz ambiente",
                     light_feature=DeviceFeatureEnum.LIGHT_AMBIENT,
                 )
             )

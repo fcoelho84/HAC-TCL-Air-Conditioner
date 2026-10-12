@@ -162,7 +162,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     deviceFeature=DeviceFeatureEnum.NUMBER_TARGET_TEMPERATURE,
-                    name="Set Target Temperature",
+                    name="Temperatura alvo",
                     type="SetTargetTemperature",
                     available_fn=lambda device: is_allowed(device),
                     current_value_fn=lambda device: float(
@@ -181,7 +181,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     deviceFeature=DeviceFeatureEnum.NUMBER_TARGET_DEGREE,
-                    name="Set Target Temperature",
+                    name="Temperatura alvo",
                     type="SetTargetDegree",
                     available_fn=lambda device: is_allowed(device),
                     current_value_fn=lambda device: float(device.data.target_temperature) if DeviceFeatureEnum.NUMBER_TARGET_TEMPERATURE_ALLOW_HALF_DIGITS in device.supported_features else int(device.data.target_temperature),
@@ -195,7 +195,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     deviceFeature=DeviceFeatureEnum.NUMBER_DEHUMIDIFIER_HUMIDITY,
-                    name="Set Target Humidity",
+                    name="Umidade alvo",
                     type="SetDehumidifierHumidity",
                     available_fn=lambda device: is_allowed(device),
                     current_value_fn=lambda device: device.data.humidity
@@ -209,7 +209,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.settings.native_temp_step",
-                    name="Set Temp. Step",
+                    name="Passo de temperatura",
                     min=0.5,
                     max=1,
                     step=0.5
@@ -223,7 +223,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.settings.max_temp",
-                    name="Max Temp.",
+                    name="Temperatura máxima",
                     min=10,
                     max=40,
                     step=1
@@ -237,7 +237,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.settings.min_temp",
-                    name="Min Temp.",
+                    name="Temperatura mínima",
                     min=10,
                     max=40,
                     step=1

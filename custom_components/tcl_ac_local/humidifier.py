@@ -47,7 +47,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="DeHumidifierControll",
-                    name="Dehumidifier",
+                    name="Desumidificador",
                     mode_select_feature=DeviceFeatureEnum.SELECT_MODE,
                     power_switch_feature=DeviceFeatureEnum.SWITCH_POWER,
                     humidity_set_feature=DeviceFeatureEnum.NUMBER_DEHUMIDIFIER_HUMIDITY,

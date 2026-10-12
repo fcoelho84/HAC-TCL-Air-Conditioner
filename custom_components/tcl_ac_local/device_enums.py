@@ -7,30 +7,30 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class ModeEnum(StrEnum):
-    COOL = "Cool"
-    HEAT = "Heat"
-    DEHUMIDIFICATION = "Dehumidification"
-    FAN = "Fan"
-    AUTO = "Auto"
+    COOL = "Frio"
+    HEAT = "Calor"
+    DEHUMIDIFICATION = "Desumidificação"
+    FAN = "Ventilação"
+    AUTO = "Automático"
 
 
 class DehumidifierModeEnum(StrEnum):
-    DRY = "Dry"
+    DRY = "Seco"
     TURBO = "Turbo"
-    COMFORT = "Comfort"
-    CONTINUE = "Continue"
+    COMFORT = "Conforto"
+    CONTINUE = "Contínuo"
 
 
 class UpAndDownAirSupplyVectorEnum(StrEnum):
-    UP_AND_DOWN_SWING = "Up and down swing"
-    UPWARDS_SWING = "Upwards swing"
-    DOWNWARDS_SWING = "Downwards swing"
-    TOP_FIX = "Top fix"
-    UPPER_FIX = "Upper fix"
-    MIDDLE_FIX = "Middle fix"
-    LOWER_FIX = "Lower fix"
-    BOTTOM_FIX = "Bottom fix"
-    NOT_SET = "Not set"
+    UP_AND_DOWN_SWING = "Oscilação vertical"
+    UPWARDS_SWING = "Oscilação para cima"
+    DOWNWARDS_SWING = "Oscilação para baixo"
+    TOP_FIX = "Fixo no topo"
+    UPPER_FIX = "Fixo em cima"
+    MIDDLE_FIX = "Fixo no meio"
+    LOWER_FIX = "Fixo embaixo"
+    BOTTOM_FIX = "Fixo na base"
+    NOT_SET = "Não definido"
 
 
 def getUpAndDownAirSupplyVector(
@@ -58,16 +58,16 @@ def getUpAndDownAirSupplyVector(
 
 
 class LeftAndRightAirSupplyVectorEnum(StrEnum):
-    LEFT_AND_RIGHT_SWING = "Left and right swing"
-    LEFT_SWING = "Left swing"
-    MIDDLE_SWING = "Middle swing"
-    RIGHT_SWING = "Right swing"
-    LEFT_FIX = "Left fix"
-    CENTER_LEFT_FIX = "Center-left fix"
-    MIDDLE_FIX = "Middle fix"
-    CENTER_RIGHT_FIX = "Center-right fix"
-    RIGHT_FIX = "Right fix"
-    NOT_SET = "Not set"
+    LEFT_AND_RIGHT_SWING = "Oscilação horizontal"
+    LEFT_SWING = "Oscilação à esquerda"
+    MIDDLE_SWING = "Oscilação no meio"
+    RIGHT_SWING = "Oscilação à direita"
+    LEFT_FIX = "Fixo à esquerda"
+    CENTER_LEFT_FIX = "Fixo centro-esquerda"
+    MIDDLE_FIX = "Fixo no meio"
+    CENTER_RIGHT_FIX = "Fixo centro-direita"
+    RIGHT_FIX = "Fixo à direita"
+    NOT_SET = "Não definido"
 
 
 def getLeftAndRightAirSupplyVector(
@@ -97,10 +97,10 @@ def getLeftAndRightAirSupplyVector(
 
 
 class SleepModeEnum(StrEnum):
-    STANDARD = "Standard"
-    ELDERLY = "Elderly"
-    CHILD = "Child"
-    OFF = "off"
+    STANDARD = "Padrão"
+    ELDERLY = "Idoso"
+    CHILD = "Criança"
+    OFF = "Desligado"
 
 
 def getSleepMode(sleep: int | float) -> SleepModeEnum:
@@ -117,7 +117,7 @@ def getSleepMode(sleep: int | float) -> SleepModeEnum:
 
 class WindSeed7GearEnum(StrEnum):
     TURBO = "Turbo"
-    AUTO = "Auto"
+    AUTO = "Automático"
     SPEED_1 = "1"
     SPEED_2 = "2"
     SPEED_3 = "3"
@@ -149,14 +149,14 @@ def getWindSeed7Gear(wind_speed_7_gear: int) -> WindSeed7GearEnum:
 
 
 class WindSeedEnum(StrEnum):
-    STRONG = "Strong"
-    HIGH = "High"
-    MID_HIGH = "Mid-high"
-    MEDIUM = "Medium"
-    MID_LOW = "Mid-low"
-    LOW = "Low"
-    MUTE = "Mute"
-    AUTO = "Auto"
+    STRONG = "Forte"
+    HIGH = "Alta"
+    MID_HIGH = "Média-alta"
+    MEDIUM = "Média"
+    MID_LOW = "Média-baixa"
+    LOW = "Baixa"
+    MUTE = "Mudo"
+    AUTO = "Automático"
 
 
 def getWindSpeed(wind_speed: int, turbo: int, silence_switch: int) -> WindSeedEnum:
@@ -178,9 +178,9 @@ def getWindSpeed(wind_speed: int, turbo: int, silence_switch: int) -> WindSeedEn
 
 
 class PortableWindSeedEnum(StrEnum):
-    HIGH = "High"
-    LOW = "Low"
-    AUTO = "Auto"
+    HIGH = "Alta"
+    LOW = "Baixa"
+    AUTO = "Automático"
 
 
 def getPortableWindSeed(wind_speed: int, has_auto_mode: bool) -> PortableWindSeedEnum:
@@ -205,14 +205,14 @@ def getPortableWindSeed(wind_speed: int, has_auto_mode: bool) -> PortableWindSee
 
 
 class PortableWind4ValueSeedEnum(StrEnum):
-    HIGH = "High"
-    MEDIUM = "Medium"
-    LOW = "Low"
-    AUTO = "Auto"
+    HIGH = "Alta"
+    MEDIUM = "Média"
+    LOW = "Baixa"
+    AUTO = "Automático"
 
 
 def getPortableWind4ValueSeed(
-    wind_speed: int, has_auto_mode: bool = False 
+    wind_speed: int, has_auto_mode: bool = False
 ) -> PortableWind4ValueSeedEnum:
     if has_auto_mode:
         match wind_speed:
@@ -242,7 +242,7 @@ class WindowAcWindSeedEnum(StrEnum):
     SPEED_1 = "1"
     SPEED_2 = "2"
     SPEED_3 = "3"
-    AUTO = "Auto"
+    AUTO = "Automático"
 
 
 def getWindowAcWindSeed(wind_speed: int) -> PortableWindSeedEnum:
@@ -273,7 +273,7 @@ def getTemperatureType(temperature_type: int) -> TemperatureTypeEnum:
 
 
 class FreshAirEnum(StrEnum):
-    AUTO = "Auto"
+    AUTO = "Automático"
     STRENGTH_1 = "1"
     STRENGTH_2 = "2"
     STRENGTH_3 = "3"
@@ -294,11 +294,11 @@ def getFreshAir(new_wind_strength: int) -> FreshAirEnum:
 
 
 class WindFeelingEnum(StrEnum):
-    NONE = "Not set"
-    SOFT = "Soft"
-    SHOWER = "Shower"
-    CARPET = "Carpet"
-    SURROUND = "Surround"
+    NONE = "Não definido"
+    SOFT = "Suave"
+    SHOWER = "Chuveiro"
+    CARPET = "Carpete"
+    SURROUND = "Envolvente"
 
 
 def getWindFeeling(soft_wind: int) -> WindFeelingEnum:
@@ -318,7 +318,7 @@ def getWindFeeling(soft_wind: int) -> WindFeelingEnum:
 
 
 class GeneratorModeEnum(StrEnum):
-    NONE = "Not set"
+    NONE = "Não definido"
     L1 = "L1 30%"
     L2 = "L2 50%"
     L3 = "L3 70%"
@@ -337,9 +337,9 @@ def getGeneratorMode(generator_mode: int) -> GeneratorModeEnum:
 
 
 class WindSpeedLowMediumHigh(StrEnum):
-    LOW = "Low"
-    MEDIUM = "Medium"
-    HIGH = "High"
+    LOW = "Baixa"
+    MEDIUM = "Média"
+    HIGH = "Alta"
 
 
 def getWindSpeedLowMediumHigh(windSpeed: int) -> GeneratorModeEnum:
@@ -366,15 +366,15 @@ class AirPurifierWorkModeEnum(StrEnum):
 
 
 class AirPurifierFanWindSpeedStrEnum(StrEnum):
-    LOW = "Low"
-    MEDIUM = "Medium"
-    HIGH = "High"
+    LOW = "Baixa"
+    MEDIUM = "Média"
+    HIGH = "Alta"
 
 
 class AirPurifierWorkModeStrEnum(StrEnum):
-    AUTO = "Auto"
-    FAN = "Fan"
-    SLEEP = "Sleep"
+    AUTO = "Automático"
+    FAN = "Ventilação"
+    SLEEP = "Sono"
 
 
 def getAirPurifierFanWindSpeed(windSpeed: int) -> AirPurifierFanWindSpeedEnum:

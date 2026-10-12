@@ -42,10 +42,10 @@ async def get_stored_dehumidifier_dem_data(
     
     stored_data, need_save = safe_set_value(stored_data, "user_config.behavior.memorize_humidity_by_mode", False)
 
-    stored_data, need_save = safe_set_value(stored_data, "humidity.Dry.value", 60)
+    stored_data, need_save = safe_set_value(stored_data, "humidity.Seco.value", 60)
     stored_data, need_save = safe_set_value(stored_data, "humidity.Turbo.value", 35)
-    stored_data, need_save = safe_set_value(stored_data, "humidity.Comfort.value", 50)
-    stored_data, need_save = safe_set_value(stored_data, "humidity.Continue.value", 15)
+    stored_data, need_save = safe_set_value(stored_data, "humidity.Conforto.value", 50)
+    stored_data, need_save = safe_set_value(stored_data, "humidity.Contínuo.value", 15)
 
     if need_save:
         await set_stored_data(hass, device_id, stored_data)

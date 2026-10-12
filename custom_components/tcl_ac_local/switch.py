@@ -315,7 +315,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_POWER,
                     type="Power",
-                    name="Power Switch",
+                    name="Ligar/Desligar",
                     icon_fn=lambda device: (
                         "mdi:power-plug"
                         if device and device.data and device.data.power_switch == 1
@@ -333,7 +333,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SHIELD_SWITCH,
                     type="ShieldSwitch",
-                    name="Shield Switch",
+                    name="Proteção",
                     icon_fn=lambda device: (
                         "mdi:shield-check" if device and device.data and device.data.shield_switch == 1 
                         else "mdi:shield-off"
@@ -350,7 +350,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_ANION,
                     type="AnionSwitch",
-                    name="Anion Switch",
+                    name="Íons negativos",
                     icon_fn=lambda device: (
                         "mdi:atom-variant" if device and device.data and device.data.anion_switch == 1 
                         else "mdi:atom-variant"
@@ -367,7 +367,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_PANEL_LIGHT_AUTO_OFF,
                     type="PanelLightAutoOffSwitch",
-                    name="Panel Light Auto Off Switch",
+                    name="Desligar luz do painel automaticamente",
                     icon_fn=lambda device: (
                         "mdi:lightbulb-outline"
                         if device and device.data and device.data.panel_light_auto_off == 1
@@ -385,7 +385,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SCREEN_SWITCH,
                     type="ScreenSwitch",
-                    name="Screen Switch",
+                    name="Tela",
                     icon_fn=lambda device: (
                         "mdi:lightbulb-outline"
                         if device and device.data and device.data.screen_switch == 1
@@ -403,7 +403,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_CHILD_LOCK_SWITCH,
                     type="ChildLockSwitch",
-                    name="Child Lock Switch",
+                    name="Trava infantil",
                     icon_fn=lambda device: (
                         "mdi:human-child" if device and device.data and device.data.child_lock_switch == 1 
                         else "mdi:human-child"
@@ -420,7 +420,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_BEEP,
                     type="BeepMode",
-                    name="Beep Mode Switch",
+                    name="Bip",
                     icon_fn=lambda device: (
                         "mdi:volume-high"
                         if device and device.data and device.data.beep_switch == 1
@@ -438,7 +438,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_ECO,
                     type="ECO",
-                    name="ECO Switch",
+                    name="ECO",
                     icon_fn=lambda device: (
                         "mdi:leaf" if device and device.data and device.data.eco == 1 else "mdi:leaf-off"
                     ),
@@ -454,7 +454,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_AI_ECO,
                     type="aiECO",
-                    name="AI ECO Switch",
+                    name="AI ECO",
                     icon_fn=lambda device: (
                         "mdi:leaf" if device and device.data and device.data.ai_eco == 1 else "mdi:leaf-off"
                     ),
@@ -470,7 +470,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_8_C_HEATING,
                     type="8CHeating",
-                    name="8 °C Heating",
+                    name="Aquecimento 8 °C",
                     icon_fn=lambda device: "mdi:numeric-8-circle-outline",
                     is_on_fn=lambda device: device.data.eight_add_hot,
                 )
@@ -484,7 +484,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_HEALTHY,
                     type="Healthy",
-                    name="Healthy Switch",
+                    name="Saudável",
                     icon_fn=lambda device: (
                         "mdi:heart" if device and device.data and device.data.healthy == 1 else "mdi:heart-off"
                     ),
@@ -500,7 +500,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_DRYING,
                     type="Drying",
-                    name="Drying Switch",
+                    name="Secagem",
                     icon_fn=lambda device: (
                         "mdi:opacity"
                         if device and device.data and device.data.anti_moldew == 1
@@ -518,7 +518,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SCREEN,
                     type="DiplayLight",
-                    name="Diplay Light Switch",
+                    name="Luz do display",
                     icon_fn=lambda device: (
                         "mdi:lightbulb-outline"
                         if device and device.data and device.data.screen == 1
@@ -536,7 +536,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_LIGHT_SENSE,
                     type="LightSense",
-                    name="Light Sense",
+                    name="Sensor de luz",
                     icon_fn=lambda device: "mdi:theme-light-dark",
                     is_on_fn=lambda device: device.data.light_sense,
                 )
@@ -550,7 +550,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SWING_WIND,
                     type="SwingWind",
-                    name="Up and down wind",
+                    name="Oscilação vertical",
                     icon_fn=lambda device: "mdi:swap-vertical",
                     is_on_fn=lambda device: device.data.swing_wind,
                 )
@@ -564,7 +564,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SLEEP,
                     type="Sleep",
-                    name="Sleep",
+                    name="Sono",
                     icon_fn=lambda device: "mdi:sleep",
                     is_on_fn=lambda device: device.data.sleep,
                 )
@@ -578,7 +578,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_SOFT_WIND,
                     type="SoftWind",
-                    name="Soft Wind",
+                    name="Vento suave",
                     icon_fn=lambda device: "mdi:weather-dust",
                     is_on_fn=lambda device: device.data.soft_wind,
                 )
@@ -592,7 +592,7 @@ async def async_setup_entry(
                     device=device,
                     deviceFeature=DeviceFeatureEnum.SWITCH_FRESH_AIR,
                     type="FreshAir",
-                    name="Fresh Air",
+                    name="Ar fresco",
                     icon_fn=lambda device: (
                         "mdi:window-open-variant"
                         if device and device.data and device.data.new_wind_switch == 1
@@ -612,7 +612,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.behavior.memorize_temp_by_mode",
-                    name="Save temp by mode",
+                    name="Salvar temperatura por modo",
                 )
             )
 
@@ -626,7 +626,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.behavior.memorize_fan_speed_by_mode",
-                    name="Save fan speed by mode",
+                    name="Salvar velocidade por modo",
                 )
             )
 
@@ -640,7 +640,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.behavior.silent_beep_when_turn_on",
-                    name="Silent beep when turn on",
+                    name="Bip silencioso ao ligar",
                 )
             )
 
@@ -654,7 +654,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     config_path="user_config.behavior.memorize_humidity_by_mode",
-                    name="Save humidity by mode",
+                    name="Salvar umidade por modo",
                 )
             )
 

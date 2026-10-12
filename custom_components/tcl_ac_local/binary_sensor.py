@@ -35,7 +35,7 @@ async def async_setup_entry(
                 coordinator=coordinator,
                 device=device,
                 type="IsOnline",
-                name="Is Online",
+                name="Online",
                 icon_fn=lambda device: (
                     "mdi:cloud-check-outline"
                     if device.is_online == 1
@@ -55,7 +55,7 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="IsDehumidifierWaterBucketFull",
-                    name="Is Water Bucket Full",
+                    name="Reservatório cheio",
                     icon_fn=lambda device: (
                         "mdi:bucket"
                         if 5 in device.data.error_code

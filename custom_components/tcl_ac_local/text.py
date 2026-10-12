@@ -33,7 +33,7 @@ async def async_setup_entry(
                 hass=hass,
                 coordinator=coordinator,
                 type="ManualStateDump",
-                name="Manual state dump action",
+                name="Dump manual de estado",
                 device=device,
                 enabled=True,
             )
@@ -73,7 +73,7 @@ async def async_setup_entry(
                 hass=hass,
                 coordinator=coordinator,
                 type="diag.error_codes_array",
-                name="Error Codes",
+                name="Códigos de erro",
                 device=device,
                 value_function=lambda device: device.data.error_code,
                 enabled=True,
@@ -86,7 +86,7 @@ async def async_setup_entry(
                 hass=hass,
                 coordinator=coordinator,
                 type="ManualStateDump",
-                name="Manual state dump action",
+                name="Dump manual de estado",
                 device=device,
                 enabled=False,
             )

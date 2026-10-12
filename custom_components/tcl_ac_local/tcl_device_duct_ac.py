@@ -65,18 +65,18 @@ async def get_stored_duct_ac_data(
     stored_data, need_save = safe_set_value(stored_data, "user_config.settings.min_temp", 16)
     stored_data, need_save = safe_set_value(stored_data, "user_config.settings.max_temp", 31)
 
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Cool.value", 24)
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Heat.value", 36)
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Dehumidification.value", 24)
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Fan.value", 24)
-    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Auto.value", 24)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Frio.value", 24)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Calor.value", 36)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Desumidificação.value", 24)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Ventilação.value", 24)
+    stored_data, need_save = safe_set_value(stored_data, "target_temperature.Automático.value", 24)
 
-    default_wind_speed = "Auto"
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Cool.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Heat.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Dehumidification.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Fan.value", default_wind_speed)
-    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Auto.value", default_wind_speed)
+    default_wind_speed = "Automático"
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Frio.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Calor.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Desumidificação.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Ventilação.value", default_wind_speed)
+    stored_data, need_save = safe_set_value(stored_data, "fan_speed.Automático.value", default_wind_speed)
 
     if need_save:
         await set_stored_data(hass, device_id, stored_data)
