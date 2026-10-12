@@ -273,7 +273,6 @@ class TemperatureHandler(TclEntityBase, NumberEntity):
 
         self._attr_assumed_state = False
         self._attr_device_class = NumberDeviceClass.TEMPERATURE
-        self._attr_translation_key = None
         self._attr_mode = NumberMode.BOX
         self._attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS
         self._attr_native_value = self.current_value_fn(self.device)
@@ -333,7 +332,6 @@ class HumidityHandler(TclEntityBase, NumberEntity):
 
         self._attr_assumed_state = False
         self._attr_device_class = NumberDeviceClass.HUMIDITY
-        self._attr_translation_key = None
         self._attr_mode = NumberMode.BOX
         self._attr_native_unit_of_measurement = PERCENTAGE
         self._attr_native_value = self.current_value_fn(self.device)

@@ -30,7 +30,7 @@ from .device_enums import (AirPurifierFanWindSpeedStrEnum,
                            getWindSpeedLowMediumHigh)
 from .device_features import DeviceFeatureEnum
 from .device_types import DeviceTypeEnum
-from .tcl_entity_base import TclEntityBase
+from .tcl_entity_base import TclEntityBase, type_to_translation_key
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -793,6 +793,18 @@ class DesiredStateHandlerForSelect:
         )
 
 
+def get_SELECT_VERTICAL_DIRECTION_type(device: Device) -> str:
+    if device.device_type == DeviceTypeEnum.SPLIT_AC_FRESH_AIR:
+        return "AirFlow"
+    return "UpAndDownAirSupplyVector"
+
+
+def get_SELECT_HORIZONTAL_DIRECTION_type(device: Device) -> str:
+    if device.device_type == DeviceTypeEnum.SPLIT_AC_FRESH_AIR:
+        return "HorizontalAirFlow"
+    return "LeftAndRightAirSupplyVector"
+
+
 def get_SELECT_VERTICAL_DIRECTION_name(device: Device) -> str:
     if device.device_type == DeviceTypeEnum.SPLIT_AC_FRESH_AIR:
         return "Air flow"
@@ -1162,6 +1174,9 @@ async def async_setup_entry(
                     type="UpAndDownAirSupplyVector",
                     name=get_SELECT_VERTICAL_DIRECTION_name(device),
                     icon_fn=lambda device: "mdi:swap-vertical",
+                    translation_key=type_to_translation_key(
+                        get_SELECT_VERTICAL_DIRECTION_type(device)
+                    ),
                 )
             )
 
@@ -1175,6 +1190,9 @@ async def async_setup_entry(
                     type="LeftAndRightAirSupplyVector",
                     name=get_SELECT_HORIZONTAL_DIRECTION_name(device),
                     icon_fn=lambda device: "mdi:swap-horizontal",
+                    translation_key=type_to_translation_key(
+                        get_SELECT_HORIZONTAL_DIRECTION_type(device)
+                    ),
                 )
             )
 
@@ -1221,8 +1239,11 @@ class SelectHandler(TclEntityBase, SelectEntity):
         name: str,
         deviceFeature: DeviceFeatureEnum,
         icon_fn: lambda device: str,
+        translation_key: str | None = None,
     ) -> None:
         TclEntityBase.__init__(self, coordinator, type, name, device)
+        if translation_key is not None:
+            self._attr_translation_key = translation_key
 
         self.icon_fn = icon_fn
         self.iot_handler = DesiredStateHandlerForSelect(
